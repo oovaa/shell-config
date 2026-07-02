@@ -69,8 +69,8 @@ compdef _directories md
 # Define aliases.
 alias tree='tree -a -I .git'
 
-# Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
+# eza - modern ls replacement
+alias ls='eza -a --group-directories-first'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
@@ -96,21 +96,24 @@ export PATH="$HOME/.opencode/bin:$HOME/.omar-bin:$BUN_INSTALL/bin:$HOME/.local/b
 
 
 #ma aliases
-alias upd='sudo dnf update && list'
-alias upg='sudo dnf upgrade'
-alias list='dnf list --updates'
+alias upd='sudo apt update && apt list --upgradable'
+alias upg='sudo apt upgrade'
+alias list='apt list --upgradable'
 alias fuck='thefuck'
-alias lsd='ls -d */'
+alias lsd='eza -d */'
 alias v='vim'
 alias stz='exec zsh'
 alias bcat='bat'
 alias pcs='find . -type f -name "*.py" -exec pycodestyle {} +'
 alias shc='shellcheck'
 
-# Aliases for commonly used commands
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# Aliases for commonly used commands (eza-based)
+alias ll='eza -la --group-directories-first --git'
+alias la='eza -a'
+alias l='eza -CF'
+alias lt='eza --tree --level=2'
+alias lmt='eza -la --sort=modified'
+alias lsize='eza -la --sort=size --reverse'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 alias rsaloc='~/.ssh/id_rsa'
@@ -119,7 +122,7 @@ alias web2='ssh -i ~/.ssh/id_rsa  ubuntu@54.84.65.46'
 alias lb='ssh -i ~/.ssh/id_rsa  ubuntu@54.160.99.228'
 alias penv="source venv/bin/activate"
 alias wifi="wifi toggle"
-alias install="sudo dnf install"
+alias install="sudo apt install"
 
 # git status - Show the current status of the repository
 alias gitstat='git status'
@@ -161,6 +164,8 @@ alias gsl='git status --long'            # Detailed status with full file paths
 alias gsu='git status --untracked-files' # Show untracked files
 alias gsi='git status --ignored'         # Show ignored files
 alias gf='git fetch'                     # Show ignored files
+alias n='nvim'
+
 
 # Custom functions
 extract() {
@@ -209,3 +214,6 @@ nvm() {
 node() { unset -f node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; node "$@"; }
 npm() { unset -f node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; npm "$@"; }
 npx() { unset -f node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; npx "$@"; }
+
+
+
