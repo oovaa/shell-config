@@ -96,8 +96,8 @@ export PATH="$HOME/.opencode/bin:$HOME/.omar-bin:$BUN_INSTALL/bin:$HOME/.local/b
 
 
 #ma aliases
-alias upd='sudo apt update && apt list --upgradable'
-alias upg='sudo apt upgrade'
+alias ud='sudo apt update && apt list --upgradable'
+alias ug='sudo apt upgrade'
 alias list='apt list --upgradable'
 alias fuck='thefuck'
 alias lsd='eza -d */'
@@ -217,3 +217,5 @@ npx() { unset -f node npm npx; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
 
 
 
+alias oc=opencode
+alias n=nvim
