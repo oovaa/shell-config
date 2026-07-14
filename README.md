@@ -12,14 +12,27 @@ My Zsh configuration using [zsh4humans](https://github.com/romkatv/zsh4humans) +
 
 ## Install
 
+Run the install script from a clone of this repo. It installs `zsh` (via
+`apt`, `dnf`, `pacman` or `brew`), symlinks the dotfiles (backing up any
+existing ones), installs the Meslo Nerd Font for Powerlevel10k glyphs, and
+sets `zsh` as your default shell.
+
+```bash
+git clone https://github.com/oovaa/shell-config.git ~/shell-config
+cd ~/shell-config
+./install.sh
+```
+
+Then start a new shell (`zsh`). On first launch zsh4humans + Powerlevel10k
+finish their own setup.
+
+### Manual install
+
 ```bash
 # Backup your existing config
 mv ~/.zshrc ~/.zshrc.bak
 mv ~/.zshenv ~/.zshenv.bak
 mv ~/.p10k.zsh ~/.p10k.zsh.bak
-
-# Clone this repo
-git clone https://github.com/oovaa/shell-config.git ~/shell-config
 
 # Create symlinks
 ln -s ~/shell-config/.zshrc ~/.zshrc

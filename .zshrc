@@ -78,13 +78,18 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
 # Homebrew (cache check)
 if [[ -z "${HOMEBREW_PREFIX}" ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+  for brew_prefix in /home/linuxbrew/.linuxbrew /opt/homebrew /usr/local; do
+    if [ -x "$brew_prefix/bin/brew" ]; then
+      eval "$("$brew_prefix/bin/brew" shellenv zsh)"
+      break
+    fi
+  done
 fi
 
 # bun completions (lazy-load)
 _bun_completion() {
   unset -f _bun_completion
-  [ -s "/home/omar/.bun/_bun" ] && source "/home/omar/.bun/_bun"
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 }
 compinit -C  # skip security check for speed
 
@@ -191,10 +196,10 @@ extract() {
 }
 
 # >>> juliaup initialize >>>
-path=('/home/omar/.juliaup/bin' $path)
+path=("$HOME/.juliaup/bin" $path)
 export PATH
 # Lazy-load julia completions
-[ -f "/home/omar/.julia/juliaup/completions/zsh.zsh" ] && {
+[ -f "$HOME/.julia/juliaup/completions/zsh.zsh" ] && {
   zstyle ':completion:*' fpath ~/.julia/juliaup/completions
 }
 # <<< juliaup initialize <<<
